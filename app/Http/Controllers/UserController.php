@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User; //import this
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash; //import this for password hashing
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -79,4 +80,30 @@ class UserController extends Controller
             
         }
     }
+
+// Login user
+public function loginUser(Request $request)
+{
+    $credentials = $request->validate([
+        'email' => 'required|email',
+        'password' => 'required|min:4',
+    ]);
+
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
+        return redirect('/users')->with('success', 'Welcome back, ' . Auth::user()->name . '!');
+    }
+
+    return back()->withErrors(['email' => 'Invalid email or password.'])->withInput();
 }
+
+// Logout user
+public function logoutUser(Request $request)
+{
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+    return redirect('/login')->with('success', 'Logged out successfully!');
+}
+}
+

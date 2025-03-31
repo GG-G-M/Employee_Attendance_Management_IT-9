@@ -11,7 +11,16 @@
         <div class="card"> 
             <div class="card-header">
                 USER
-                <a>Go back</a>
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                <h1>Hello, {{ Auth::user()->name }}</h1>
+                <form action="{{ route('logoutUser') }}" method="POST" style="display: inline;">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Logout</button>
+                </form>                
                 <a href="/add/user" class="btn btn-success btn-sn float-end">
                     Add User
                 </a>

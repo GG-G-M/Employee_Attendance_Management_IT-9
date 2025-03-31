@@ -25,7 +25,7 @@
                         @error('full_name')
                             <span class="text-danger">{{$message}}</span>
                         @enderror
-                    </div>
+                    </div> 
                     <div class="mb-3">
                         <label for="formGroupExampleInput2" class="form-label">Email</label>
                         <input type="email" name="email" class="form-control" value="{{$user->email}}" id="formGroupExampleInput2" placeholder="Enter Email">

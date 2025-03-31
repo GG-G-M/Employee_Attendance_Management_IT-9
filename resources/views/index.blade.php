@@ -21,9 +21,6 @@
     <!-- Login Box -->
     <div class="login-box">
         <div class="d-flex flex-column gap-3 mb-4">
-            <a href="users" class="btn btn-dark d-flex align-items-center justify-content-center gap-3 py-3">
-                <i class="fas fa-user"></i> Employee Management
-            </a>
             <a href="login" class="btn btn-dark d-flex align-items-center justify-content-center gap-3 py-3">
                 <i class="fas fa-user"></i> Employee Login
             </a>

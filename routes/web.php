@@ -22,3 +22,12 @@ Route::get('/register', function ()
 {
     return view('register');
 });
+
+Route::get('/login', function () {
+    return view('login'); // Show login page
+})->name('login');
+
+Route::post('/login', [UserController::class, 'loginUser'])->name('loginUser');
+
+// Use only one logout route (POST is more secure)
+Route::post('/logout', [UserController::class, 'logoutUser'])->name('logoutUser');
