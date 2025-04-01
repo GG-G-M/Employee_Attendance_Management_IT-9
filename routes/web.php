@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\UserController; //import this
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -26,8 +26,10 @@ Route::get('/register', function ()
 Route::get('/login', function () {
     return view('login'); // Show login page
 })->name('login');
-
 Route::post('/login', [UserController::class, 'loginUser'])->name('loginUser');
+
+Route::get('/login-qr', [UserController::class, 'showQRCodeScanner']);
+Route::post('/login-qr/scan', [UserController::class, 'scanQRCode'])->name('scan.qr');
 
 // Use only one logout route (POST is more secure)
 Route::post('/logout', [UserController::class, 'logoutUser'])->name('logoutUser');

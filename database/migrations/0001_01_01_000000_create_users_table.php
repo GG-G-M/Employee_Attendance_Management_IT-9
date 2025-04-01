@@ -15,11 +15,27 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('phone_number')->nullable();
+            $table->enum('role', ['admin', 'hr', 'employee'])->default('employee');
+            $table->string('key')->unique()->nullable()->comment('For QR code authentication');
+            $table->string('phone')->nullable();
+            $table->string('position')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+        });
+
+        Schema::create('attendances', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->date('date');
+            $table->tinyInteger('status')->comment('1=Present, 2=Late, 3=Absent, 4=Holiday');
+            $table->time('check_in')->nullable();
+            $table->time('check_out')->nullable();
+            $table->text('notes')->nullable();
+            $table->timestamps();
+            
+            $table->unique(['user_id', 'date']);
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -43,8 +59,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('attendances');
+        Schema::dropIfExists('users');
     }
 };

@@ -22,18 +22,14 @@
     <div class="login-box">
         <div class="d-flex flex-column gap-3 mb-4">
             <a href="login" class="btn btn-dark d-flex align-items-center justify-content-center gap-3 py-3">
-                <i class="fas fa-user"></i> Employee Login
+                <i class="fas fa-user"></i> Login
             </a>
-            <a href="login" class="btn btn-dark d-flex align-items-center justify-content-center gap-3 py-3">
-                <i class="fas fa-user-shield"></i> Admin Login
+            <a href="login-qr" class="btn btn-light d-flex align-items-center justify-content-center gap-3 py-3">
+                <i class="fas fa-user-plus"></i> QR
             </a>
         </div>
-        
-        <a href="register" class="btn btn-light d-flex align-items-center justify-content-center gap-3 py-3">
-            <i class="fas fa-user-plus"></i> Sign Up
-        </a>
     </div>
-</div>
+
     <!-- Bootstrap JS (Optional) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

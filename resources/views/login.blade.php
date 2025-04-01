@@ -42,7 +42,7 @@
         </form>
 
         <div class="login-link">
-            <p>Already have an account? <a href="/">Go Back</a></p>
+            <a href="/">Go Back</a>
         </div>
     </div>
 </body>
