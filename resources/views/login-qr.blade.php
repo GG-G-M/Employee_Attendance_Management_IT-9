@@ -53,12 +53,6 @@
         </div>
 
         <div class="scanner-box">
-            @if(session('message'))
-                <div class="alert alert-success">
-                    {{ session('message') }}
-                </div>
-            @endif
-
             @if(session('error'))
                 <div class="alert alert-danger">
                     {{ session('error') }}
@@ -72,7 +66,7 @@
 
             <div class="qr-detected-container" style="display: none;">
                 <h4 class="text-center mb-4">QR Code Detected!</h4>
-                <form action="{{ route('scan.qr') }}" method="POST" id="qr-login-form">
+                <form action="{{ route('qr.scan') }}" method="POST" id="qr-login-form">
                     @csrf
                     <input type="hidden" id="detected-qr-code" name="qr_code">
                     <button type="submit" class="btn btn-dark form-control mb-2" id="login-btn">
@@ -85,7 +79,7 @@
             </div>
 
             <div class="login-link text-center mt-4">
-                <a href="/" class="text-decoration-none"><i class="fas fa-arrow-left"></i> Go Back</a>
+                <a href="{{ route('login') }}" class="text-decoration-none"><i class="fas fa-arrow-left"></i> Back to Regular Login</a>
             </div>
         </div>
     </div>

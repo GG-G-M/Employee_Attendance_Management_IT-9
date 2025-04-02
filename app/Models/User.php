@@ -28,13 +28,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // Relationships
     public function attendances()
     {
         return $this->hasMany(Attendance::class);
     }
 
-    // Helper methods
     public function isAdmin()
     {
         return $this->role === 'admin';

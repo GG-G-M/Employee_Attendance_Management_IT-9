@@ -10,32 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AttendanceController extends Controller
 {
-    // Admin/HR view
-    public function index(Request $request)
-    {
-        $date = $request->input('date', Carbon::today()->format('Y-m-d'));
-        
-        $query = Attendance::with('user')
-            ->whereDate('date', $date)
-            ->orderBy('date', 'desc');
-
-        // HR can only see their department (if we had departments)
-        if (Auth::user()->isHR()) {
-            $query->whereHas('user', function($q) {
-                // Add department filter here if needed
-            });
-        }
-
-        // Employee can only see their own records
-        if (Auth::user()->isEmployee()) {
-            $query->where('user_id', Auth::id());
-        }
-
-        $attendances = $query->paginate(20);
-
-        return view('attendance.index', compact('attendances', 'date'));
-    }
-
     // Employee check-in
     public function checkIn()
     {
@@ -124,4 +98,6 @@ class AttendanceController extends Controller
             Attendance::STATUS_LATE : 
             Attendance::STATUS_PRESENT;
     }
+
+    
 }

@@ -4,19 +4,16 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+return new class extends Migration {
+    public function up()
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->enum('role', ['admin', 'hr', 'employee'])->default('employee');
-            $table->string('key')->unique()->nullable()->comment('For QR code authentication');
+            $table->string('key')->unique()->comment('QR identifier');
+            $table->time('duty_time')->default('09:00:00')->comment('Expected check-in time');
             $table->string('phone')->nullable();
             $table->string('position')->nullable();
             $table->timestamp('email_verified_at')->nullable();
@@ -29,7 +26,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->date('date');
-            $table->tinyInteger('status')->comment('1=Present, 2=Late, 3=Absent, 4=Holiday');
+            $table->enum('status', ['present', 'late', 'absent', 'holiday'])->default('present');
             $table->time('check_in')->nullable();
             $table->time('check_out')->nullable();
             $table->text('notes')->nullable();
@@ -37,6 +34,7 @@ return new class extends Migration
             
             $table->unique(['user_id', 'date']);
         });
+
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
